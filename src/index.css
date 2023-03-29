@@ -1,0 +1,88 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.header{
+  background-color: #3b5998;
+}
+.header-wrap img{
+  height: 80%;
+  margin: 0 0 0 1%;
+}
+
+.main-section{
+  max-width: 1170px;
+  background-color: #61dafb;
+  height: 100%;
+  display: flex;
+  margin: 0 auto;
+}
+.nav-bar{
+  background-color: #9cadeb;
+  width: 20%;
+}
+.nav-bar ul{
+  list-style-type: none;
+}
+a{
+  text-decoration: none;
+  color: white;
+}
+.header-wrap{
+  width: 100%;
+  max-width: 1170px;
+  margin: 0 auto;
+  height: 80px;
+  align-items: center;
+  display: flex;
+}
+.profile{
+  background-color: blanchedalmond;
+  width: 80%;
+  padding: 2%;
+}
+
+.user-info{
+display: flex;
+}
+.user-info img{
+  width: 150px;
+  margin: 2% 0 0;
+}
+.top-banner{
+  max-height: 100px;
+  overflow: hidden;
+}
+.user-info-data{
+  padding: 0 0 0 2%;
+
+}
+.new-post{
+}
+.new-post input{
+  width: 100%;
+  min-height: 100px;
+}
+
+
+.micro-avatar img {
+  width: 50px;
+  border-radius: 50%;
+}
+.published-post{
+  margin: 2% 0 0;
+  display: flex;
+}
+.published-post span {
+  padding: 0 0 0 2%;
+
+}
