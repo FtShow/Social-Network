@@ -1,0 +1,21 @@
+.microAvatar img {
+    width: 50px;
+    border-radius: 50%;
+}
+
+.publishedPost {
+    margin: 2% 0 0;
+    display: flex;
+}
+
+.publishedPost span {
+    padding: 0 0 0 2%;
+
+}
+.textPost{
+}
+.postContainer{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}

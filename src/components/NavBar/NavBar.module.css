@@ -1,0 +1,38 @@
+.navBar{
+    background-color: #2e2f34;
+    width: 18%;
+    margin-right: 2%;
+    border-radius: 0 0 1em 1em;
+}
+.navBar ul{
+    list-style-type: none;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+a.active{
+
+    color: #2b53bd;
+    font-weight: 700;
+}
+.friendsBlock{
+    margin: 100% 0 0 10%;
+    width: 80%;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 0;
+    background-color: #61dafb;
+    border-radius: 5%;
+}
+
+.itemFriend{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: red;
+    margin: 5px;
+}

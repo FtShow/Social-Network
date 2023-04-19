@@ -1,0 +1,85 @@
+
+.dialogWindow{
+    display: flex;
+    width: 80%;
+    background-color: #2e2f34;
+    border-radius: 0 0 1em 1em;
+}
+.dialogsListNav{
+    width: 20%;
+}
+.dialogsList{
+    list-style: none;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: rgb(86, 86, 91);
+    border: 2px solid #838383;
+    border-radius: 1em;
+}
+.dialogsList li{
+    padding: 20px 0 20px 20px;
+    font-size: 20px;
+    display: flex;
+}
+.dialogsList li a{
+    color: #9ea6bb;
+}
+
+.messages{
+    display: flex;
+    width: 80%;
+    height: 100%;
+    flex-direction: column;
+    justify-content: end;
+}
+ .messages span{
+     display: flex;
+     margin: 5px 0;
+     width: 80%;
+     justify-content: center;
+     font-size: 20px;
+     padding: 20px;
+     align-items: center;
+     background-color: rgba(127, 129, 134, 0.18);
+     border-radius: 30px;
+}
+.youMessage{
+    margin: 5px 0 5px calc(20% - 40px)!important;
+}
+ li a img{
+     width: 40px;
+     border-radius: 50%;
+ }
+ li a{
+     display: flex;
+ }
+li a span {
+    padding: 0 0 0 5px;
+    line-height: 2;
+}
+.messageArea{
+    width: 99%;
+    padding-left: 1%;
+}
+.messageArea input{
+    width: 90%;
+    height: 75px;
+    background-color: rgb(86, 86, 91);
+    border: 2px solid #838383;
+    outline: none;
+    border-radius: 1em;
+    color: #dee0e3;
+}
+.messageArea button {
+    width: 8%;
+    height: 81px;
+    background-color: rgb(86, 86, 91);
+    margin-left: 3px;
+
+    border: 2px solid #838383;
+    border-radius: 1em;
+
+}
+

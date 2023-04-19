@@ -1,0 +1,18 @@
+.profile {
+    background-color: #292a2f;
+    width: 76%;
+    padding: 2%;
+    overflow: scroll;
+    border-radius: 0 0 1em 1em;
+}
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+    width: 2px; /* ширина для вертикального скролла */
+    height: 0px; /* высота для горизонтального скролла */
+    background-color: #5e646c;
+}
+/* ползунок скроллбара */
+::-webkit-scrollbar-thumb {
+    background-color: #a6a5a5;
+    border-radius: 9em;
+}

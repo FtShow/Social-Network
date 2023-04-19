@@ -1,3 +1,11 @@
+html, body{
+  height: 100%;
+  background-color: #202124;
+  color: #dee0e3;
+}
+.app-wrapper{
+  height: calc(100vh - 110px);
+}
 .App {
   text-align: center;
 }

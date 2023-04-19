@@ -1,0 +1,28 @@
+
+.profile {
+    background-color: #f7f7f7;
+    width: 80%;
+    padding: 2%;
+
+}
+
+.userInfo {
+    display: flex;
+}
+
+.userInfo img {
+    width: 150px;
+    margin: 2% 0 0;
+}
+
+.topBanner {
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.userInfoData {
+    padding: 0 0 0 2%;
+}
+
+
+

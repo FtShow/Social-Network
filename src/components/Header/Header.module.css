@@ -1,0 +1,15 @@
+.header{
+    background-color: rgb(56 56 59)
+}
+.headerWrap img{
+    height: 80%;
+    margin: 0 0 0 1%;
+}
+.headerWrap{
+    width: 100%;
+    max-width: 1170px;
+    margin: 0 auto;
+    height: 80px;
+    align-items: center;
+    display: flex;
+}
