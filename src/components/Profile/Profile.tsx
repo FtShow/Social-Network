@@ -7,11 +7,15 @@ import {messagesPageTypeProps, profilePageTypeProps} from "../../Redux/State";
 
 
 export const Profile:React.FC<profilePageTypeProps> = (props) => {
-
+props.getState()
     return (
         <div className={s.profile}>
             <ProfileInfo/>
-            <Posts addPost={props.addPost} posts={props.profilePage.posts}  />
+            <Posts addPost={props.addPost.bind(props)}
+                   posts={props.profilePage.posts}
+                   newMessage={props.profilePage.newPosts}
+                   changeNewPostText={props.changeNewPostText.bind(props)}
+            />
         </div>
 
     )

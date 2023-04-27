@@ -8,10 +8,13 @@ import {Dialogs} from "./components/Dialogs/Dialogs";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {RootStateType} from "./Redux/State";
+import {StoreType} from "./Redux/State";
 
-function App(props: RootStateType) {
-    const {messagesPage, profilePage } = props.state;
+function App(props: StoreType) {
+
+    const {messagesPage, profilePage } = props._state
+
+props.getState()
 
     return (
         <BrowserRouter>
@@ -20,7 +23,10 @@ function App(props: RootStateType) {
                 <div className="main-section">
 
                     <NavBar/>
-                    <Route path='/Profile' render={()=><Profile addPost={props.addPost} profilePage={profilePage}/>}/>
+                    <Route path='/Profile' render={()=><Profile changeNewPostText={props.changeNewPostText.bind(props)}
+                                                                addPost={props.addPost.bind(props)}
+                                                                getState={props.getState.bind(props)}
+                                                                profilePage={profilePage}/>}/>
 
 
                     <Route path="/Dialogs" render={() => <Dialogs messagesPage={messagesPage}/>}/>

@@ -3,11 +3,31 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import {addPost, state} from "./Redux/State";
-import {rerenderEntreTree} from "./Redux/rerender";
+import {store, subscriber} from "./Redux/State";
 
-debugger
-rerenderEntreTree(state, addPost)
+
+export let rerenderEntreTree = (
+) =>{
+
+    ReactDOM.render(
+        <App
+             subscriber={store.subscriber}
+             _state={store._state}
+             addPost={store.addPost}
+             changeNewPostText={store.changeNewPostText}
+             getState={store.getState}
+
+
+            />,
+        document.getElementById("root")
+    );
+}
+
+rerenderEntreTree()
+subscriber(rerenderEntreTree)
+
+
+
 
 
 
