@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 
-import {store, subscriber} from "./Redux/State";
+
+import {store} from "./Redux/State";
 
 
 export let rerenderEntreTree = (
@@ -11,20 +12,14 @@ export let rerenderEntreTree = (
 
     ReactDOM.render(
         <App
-             subscriber={store.subscriber}
-             _state={store._state}
-             addPost={store.addPost}
-             changeNewPostText={store.changeNewPostText}
-             getState={store.getState}
-
-
+             store={store}
             />,
         document.getElementById("root")
     );
 }
 
 rerenderEntreTree()
-subscriber(rerenderEntreTree)
+store.subscriber(rerenderEntreTree)
 
 
 
