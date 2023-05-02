@@ -1,6 +1,9 @@
 // import {rerenderEntreTree} from "./rerender";
 import {stat} from "fs";
-
+const ADD_POST = "ADD-POST";
+const CHANGE_NEW_POST_TEST = "CHANGE-NEW-POST-TEXT";
+const CHANGE_NEW_MESSAGE_BODY = "CHANGE-NEW-MESSAGE-BODY";
+const SEND_MESSAGE = "SEND-MESSAGE";
 export type dialogsItemType = {
     id: number,
     name: string,
@@ -8,40 +11,40 @@ export type dialogsItemType = {
 }
 export type textMessageItemType = {
     id: number,
-    text: string,
+    text: string | undefined,
     yourMessage: boolean
 }
 export type messagesPageType = {
     dialogs: dialogsItemType[]
     textMessage: textMessageItemType[]
+    newMessageBody: string | undefined
 }
 export type messagesPageTypeProps = {
     messagesPage: messagesPageType
+    dispatch: (v: Action) => void
 }
 export type postsItemType = {
     id: number,
-    post: string
+    post: string | undefined
     likes: number
 }
 
 
 export type profilePageType = {
     posts: postsItemType[];
-    newPosts: string
+    newPosts: string | undefined
 
 }
 export type PostPageProsType = {
     posts: postsItemType[];
-    addPost: (v: string) => void;
-    newMessage: any;
-    changeNewPostText: (v: string) => void
+    newMessage: string | undefined;
+    dispatch: (v: Action) => void
 }
 
 export type profilePageTypeProps = {
     profilePage: profilePageType;
     getState: () => stateType
-    addPost: (v: string) => void
-    changeNewPostText: (v: string) => void
+    dispatch: (v: Action) => void
 }
 
 
@@ -50,14 +53,18 @@ export type stateType = {
     profilePage: profilePageType
 
 }
-
+type Action = {
+    type: string;
+    textPost?: string;
+    newTextPost?: string;
+    newMessageBody?: string
+};
 export type StoreType = {
     _state: stateType;
-    addPost: (v: string) => void
     subscriber: (callback: () => void) => void
     _onChange: () => void
     getState: () => stateType
-    changeNewPostText: (v: string) => void
+    dispatch: (v: Action) => void
 }
 export type RootStoreType = {
     store: StoreType
@@ -113,7 +120,8 @@ export const store: StoreType = {
                 {id: 4, text: "text3", yourMessage: false},
                 {id: 5, text: "text3", yourMessage: true},
 
-            ]
+            ],
+            newMessageBody: ''
         },
 
         profilePage: {
@@ -134,23 +142,7 @@ export const store: StoreType = {
         }
     },
     getState() {
-        console.log(this)
         return this._state
-    },
-    addPost(textPost: string) {
-        const newPost = {
-            id: this._state.profilePage.posts.length + 1,
-            post: textPost,
-            likes: 0,
-        }
-
-        this._state.profilePage.posts.push(newPost)
-        this._onChange()
-    },
-    changeNewPostText(newTextPost: string) {
-        console.log(this)
-        this._state.profilePage.newPosts = newTextPost
-        this._onChange()
     },
     _onChange() {
         console.log(12)
@@ -158,6 +150,49 @@ export const store: StoreType = {
     subscriber(observer: any) {
         this._onChange = observer
     },
+    dispatch(action){
+        console.log(action)
+        if(action.type === ADD_POST){
+            const newPost = {
+                id: this._state.profilePage.posts.length + 1,
+                post: action.textPost,
+                likes: 0,
+            }
+
+            this._state.profilePage.posts.push(newPost)
+            this._onChange()
+        }
+        else if(action.type === 'CLEAR-POST'){
+
+
+            this._state.profilePage.newPosts = ''
+            this._onChange()
+        }
+        else if(action.type === CHANGE_NEW_POST_TEST){
+            console.log(this._state.profilePage.newPosts)
+            this._state.profilePage.newPosts = action.newTextPost
+            this._onChange()
+        }
+        else if(action.type === CHANGE_NEW_MESSAGE_BODY){
+
+            this._state.messagesPage.newMessageBody = action.newMessageBody
+            this._onChange()
+        }
+        else if(action.type === SEND_MESSAGE){
+            const newMessage = {
+                id: this._state.messagesPage.textMessage.length + 1,
+                text: action.newMessageBody,
+                yourMessage: Math.random() < 0.5
+            }
+
+            this._state.messagesPage.textMessage.push(newMessage)
+            this._onChange()
+        }
+
+    }
 }
-
-
+export const addPostActionCreator = () =>({type: ADD_POST, textPost: store._state.profilePage.newPosts})
+export const clearPostActionCreator = () =>({type: "CLEAR-POST"})
+export const changeNewPostTextActionCreator = (text: string) =>({type: CHANGE_NEW_POST_TEST, newTextPost: text})
+export const changeNewTextMessageActionCreator = (text: string) =>({type: CHANGE_NEW_MESSAGE_BODY, newMessageBody: text})
+export const sendNewMessageActionCreator = () =>({type: SEND_MESSAGE, newMessageBody: store._state.messagesPage.newMessageBody})

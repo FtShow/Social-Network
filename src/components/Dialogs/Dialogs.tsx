@@ -1,19 +1,32 @@
-import React from "react";
+import React, {ChangeEvent} from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogsItem/DialogsItem";
 import {MessageText} from "./Messages/Messages";
-import {dialogsItemType, messagesPageTypeProps, textMessageItemType} from "../../Redux/State";
+import {
+    addPostActionCreator,
+    changeNewTextMessageActionCreator, clearPostActionCreator,
+    dialogsItemType,
+    messagesPageTypeProps, sendNewMessageActionCreator,
+    textMessageItemType
+} from "../../Redux/State";
 
 
 export const Dialogs: React.FC<messagesPageTypeProps> = (props) => {
     let {dialogs, textMessage} = props.messagesPage
-    console.log(textMessage)
 
-    console.log(textMessage)
     const dialogsList = dialogs.map((elem: dialogsItemType) => (
         <DialogItem id={elem.id} avatar={elem.avatar} name={elem.name}/>))
     const messageList = textMessage.map((elem: textMessageItemType) => (
         <MessageText id={elem.id} text={elem.text} yourMessage={elem.yourMessage}/>))
+
+    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
+
+        props.dispatch(changeNewTextMessageActionCreator(e.currentTarget.value))
+    }
+    const onclickHandler = () => {
+        console.log(props.messagesPage.textMessage)
+        props.dispatch(sendNewMessageActionCreator())
+    }
     return (
 
         <div className={s.dialogWindow}>
@@ -27,8 +40,8 @@ export const Dialogs: React.FC<messagesPageTypeProps> = (props) => {
 
                 {messageList}
                 <div className={s.messageArea}>
-                    <input type="text"/>
-                    <button>send</button>
+                    <input onChange={onChangeHandler} type="text"/>
+                    <button onClick={onclickHandler}>send</button>
                 </div>
 
             </div>

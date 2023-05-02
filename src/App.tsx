@@ -12,9 +12,9 @@ import {RootStoreType, StoreType} from "./Redux/State";
 
 function App(props: RootStoreType) {
 
-    const {messagesPage, profilePage } = props.store._state
+    const {messagesPage, profilePage} = props.store._state
 
-props.store.getState()
+    props.store.getState()
 
     return (
         <BrowserRouter>
@@ -23,26 +23,25 @@ props.store.getState()
                 <div className="main-section">
 
                     <NavBar/>
-
-                    <Route path='/Profile' render={()=><Profile changeNewPostText={props.store.changeNewPostText.bind(props.store)}
-                                                                addPost={props.store.addPost.bind(props.store)}
-                                                                getState={props.store.getState.bind(props.store)}
-                                                                profilePage={profilePage}/>}/>
+                    <Route path="/Profile" render={() => <Profile dispatch={props.store.dispatch.bind(props.store)}
+                                                                  getState={props.store.getState.bind(props.store)}
+                                                                  profilePage={profilePage}/>}/>
 
 
-                    <Route path="/Dialogs" render={() => <Dialogs messagesPage={messagesPage}/>}/>
-                    <Route path="/News" component={News}/>
-                    <Route path="/Music" component={Music}/>
+                    <Route path="/Dialogs" render={() => <Dialogs messagesPage={messagesPage}
+                                                                  dispatch={props.store.dispatch.bind(props.store)}/>}/>
+                        <Route path="/News" component={News}/>
+                        <Route path="/Music" component={Music}/>
 
-                    <Route path="/Settings" component={Settings}/>
+                        <Route path="/Settings" component={Settings}/>
 
-                </div>
-                <footer> footer</footer>
-            </div>
-        </BrowserRouter>
-    );
+                        </div>
+                        <footer> footer</footer>
+                        </div>
+                        </BrowserRouter>
+                        );
 
-}
+                    }
 
 
-export default App;
+                           export default App;

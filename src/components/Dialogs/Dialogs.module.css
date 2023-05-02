@@ -30,9 +30,9 @@
 .messages{
     display: flex;
     width: 80%;
+    overflow: scroll;
     height: 100%;
     flex-direction: column;
-    justify-content: end;
 }
  .messages span{
      display: flex;
