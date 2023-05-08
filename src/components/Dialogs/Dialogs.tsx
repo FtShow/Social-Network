@@ -8,11 +8,11 @@ import {
     dialogsItemType,
     messagesPageTypeProps, sendNewMessageActionCreator,
     textMessageItemType
-} from "../../Redux/State";
+} from "../../Redux/Store";
 
 
 export const Dialogs: React.FC<messagesPageTypeProps> = (props) => {
-    let {dialogs, textMessage} = props.messagesPage
+    let {dialogs, textMessage, newMessageBody} = props.messagesPage
 
     const dialogsList = dialogs.map((elem: dialogsItemType) => (
         <DialogItem id={elem.id} avatar={elem.avatar} name={elem.name}/>))
@@ -24,7 +24,7 @@ export const Dialogs: React.FC<messagesPageTypeProps> = (props) => {
         props.dispatch(changeNewTextMessageActionCreator(e.currentTarget.value))
     }
     const onclickHandler = () => {
-        console.log(props.messagesPage.textMessage)
+
         props.dispatch(sendNewMessageActionCreator())
     }
     return (

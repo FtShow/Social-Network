@@ -4,22 +4,24 @@ import "./index.css";
 import App from "./App";
 
 
-import {store} from "./Redux/State";
+import {store} from "./Redux/Redux-Store";
 
 
-export let rerenderEntreTree = (
-) =>{
+export let rerenderEntreTree = (state: any) =>{
 
     ReactDOM.render(
         <App
-             store={store}
+            state={state} dispatch={store.dispatch.bind(state)}
             />,
         document.getElementById("root")
     );
 }
 
-rerenderEntreTree()
-store.subscriber(rerenderEntreTree)
+rerenderEntreTree(store.getState())
+
+store.subscribe(()=>{
+    rerenderEntreTree(store.getState())
+})
 
 
 

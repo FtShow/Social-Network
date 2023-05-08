@@ -1,5 +1,5 @@
 import React from "react";
-import {textMessageItemType} from "../../../Redux/State";
+import {textMessageItemType} from "../../../Redux/Store";
 import s from '../Dialogs.module.css'
 
 
