@@ -17,6 +17,7 @@
     background-color: rgb(86, 86, 91);
     border: 2px solid #838383;
     border-radius: 1em;
+    overflow: scroll;
 }
 .dialogsList li{
     padding: 20px 0 20px 20px;

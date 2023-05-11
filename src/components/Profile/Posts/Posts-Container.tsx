@@ -1,18 +1,14 @@
-import s from "./Posts.module.css";
-import {Post} from "./Post/Post";
-import React, {ChangeEvent, useRef} from "react";
+import React, {ChangeEvent} from "react";
 import {
     addPostActionCreator,
     changeNewPostTextActionCreator,
     clearPostActionCreator,
-    PostPageProsType, PostsContainerProsType
+    PostsContainerProsType
 } from "../../../Redux/Store";
 import {Posts} from "./Posts";
 
 
 export const PostsContainer: React.FC<PostsContainerProsType> = (props) => {
-
-
 
 
     const addPostCallback = () => {
@@ -22,7 +18,6 @@ export const PostsContainer: React.FC<PostsContainerProsType> = (props) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         props.dispatch(changeNewPostTextActionCreator(e.currentTarget.value))
     }
-
 
 
     return (

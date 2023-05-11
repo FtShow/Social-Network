@@ -9,6 +9,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {RootStoreType, StoreType} from "./Redux/Store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 function App(props: RootStoreType) {
 
@@ -23,20 +24,20 @@ function App(props: RootStoreType) {
                                                                   profilePage={props.state.profilePage}/>}/>
 
 
-                    <Route path="/Dialogs" render={() => <Dialogs messagesPage={props.state.messagesPage}
-                                                                  dispatch={props.dispatch.bind(props.state)}/>}/>
-                        <Route path="/News" component={News}/>
-                        <Route path="/Music" component={Music}/>
+                    <Route path="/Dialogs" render={() => <DialogsContainer messagesPage={props.state.messagesPage}
+                                                                           dispatch={props.dispatch.bind(props.state)}/>}/>
+                    <Route path="/News" component={News}/>
+                    <Route path="/Music" component={Music}/>
 
-                        <Route path="/Settings" component={Settings}/>
+                    <Route path="/Settings" component={Settings}/>
 
-                        </div>
-                        <footer> footer</footer>
-                        </div>
-                        </BrowserRouter>
-                        );
+                </div>
+                <footer> footer</footer>
+            </div>
+        </BrowserRouter>
+    );
 
-                    }
+}
 
 
-                           export default App;
+export default App;

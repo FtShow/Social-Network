@@ -1,3 +1,5 @@
+import {Action, profilePageType} from "./Store";
+
 
 
 const ADD_POST = "ADD-POST";
@@ -20,7 +22,7 @@ const initialState = {
 
     }
 
-    export const ProfileReducer = (state: any = initialState, action: any) => {
+    export const ProfileReducer = (state: profilePageType = initialState, action: Action) => {
 
         if (action.type === ADD_POST) {
             const newPost = {

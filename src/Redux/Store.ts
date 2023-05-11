@@ -1,13 +1,16 @@
 // import {rerenderEntreTree} from "./rerender";
 import {stat} from "fs";
-import { ProfileReducer} from "./ProfileReduce";
+import {ProfileReducer} from "./ProfileReduce";
 import {MessagesReducer} from "./MessagesReduce";
 import {store} from "./Redux-Store";
 import {ChangeEvent} from "react";
+
 const ADD_POST = "ADD-POST";
 const CHANGE_NEW_POST_TEST = "CHANGE-NEW-POST-TEXT";
 const CHANGE_NEW_MESSAGE_BODY = "CHANGE-NEW-MESSAGE-BODY";
 const SEND_MESSAGE = "SEND-MESSAGE";
+
+
 export type dialogsItemType = {
     id: number,
     name: string,
@@ -25,6 +28,11 @@ export type messagesPageType = {
 }
 export type messagesPageTypeProps = {
     messagesPage: messagesPageType
+    onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void
+    addMessageCallback: () => void
+}
+export type messagesContainerTypeProps = {
+    messagesPage: messagesPageType
     dispatch: (v: Action) => void
 }
 export type postsItemType = {
@@ -41,12 +49,12 @@ export type profilePageType = {
 }
 export type PostsContainerProsType = {
     dataForPostsContainer: profilePageType
-    dispatch:(v: Action)=>void
+    dispatch: (v: Action) => void
 }
 export type PostPageProsType = {
     dataForPosts: profilePageType;
-    addPostCallback:()=>void
-    onChangeCallback:(e: ChangeEvent<HTMLInputElement>)=>void
+    addPostCallback: () => void
+    onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 export type profilePageTypeProps = {
@@ -60,7 +68,7 @@ export type stateType = {
     profilePage: profilePageType
 
 }
-type Action = {
+export type Action = {
     type: string;
     textPost?: string;
     newTextPost?: string;
@@ -166,9 +174,14 @@ export type RootStoreType = {
 // }
 
 
-
-export const addPostActionCreator = () =>({type: ADD_POST, textPost: store.getState().profilePage.newPosts})
-export const clearPostActionCreator = () =>({type: "CLEAR-POST"})
-export const changeNewPostTextActionCreator = (text: string) =>({type: CHANGE_NEW_POST_TEST, newTextPost: text})
-export const changeNewTextMessageActionCreator = (text: string) =>({type: CHANGE_NEW_MESSAGE_BODY, newMessageBody: text})
-export const sendNewMessageActionCreator = () =>({type: SEND_MESSAGE, newMessageBody: store.getState().messagesPage.newMessageBody})
+export const addPostActionCreator = () => ({type: ADD_POST, textPost: store.getState().profilePage.newPosts})
+export const clearPostActionCreator = () => ({type: "CLEAR-POST"})
+export const changeNewPostTextActionCreator = (text: string) => ({type: CHANGE_NEW_POST_TEST, newTextPost: text})
+export const changeNewTextMessageActionCreator = (text: string) => ({
+    type: CHANGE_NEW_MESSAGE_BODY,
+    newMessageBody: text
+})
+export const sendNewMessageActionCreator = () => ({
+    type: SEND_MESSAGE,
+    newMessageBody: store.getState().messagesPage.newMessageBody
+})
