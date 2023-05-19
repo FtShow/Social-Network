@@ -5,28 +5,25 @@ import App from "./App";
 
 
 import {store} from "./Redux/Redux-Store";
+import {Provider} from "react-redux";
 
 
-export let rerenderEntreTree = (state: any) =>{
+export let rerenderEntreTree = (state: any) => {
 
     ReactDOM.render(
-        <App
-            state={state} dispatch={store.dispatch.bind(state)}
-            />,
-        document.getElementById("root")
+        <Provider store={store} >
+            <App/>
+        </Provider>,
+    document.getElementById('root')
     );
 }
 
 rerenderEntreTree(store.getState())
 
-store.subscribe(()=>{
+store.subscribe(() => {
+
     rerenderEntreTree(store.getState())
 })
-
-
-
-
-
 
 
 // //БЫЛО

@@ -32,8 +32,8 @@ export type messagesPageTypeProps = {
     addMessageCallback: () => void
 }
 export type messagesContainerTypeProps = {
-    messagesPage: messagesPageType
-    dispatch: (v: Action) => void
+    // messagesPage: messagesPageType
+    // dispatch: (v: Action) => void
 }
 export type postsItemType = {
     id: number,
@@ -47,20 +47,20 @@ export type profilePageType = {
     newPosts: string | undefined
 
 }
-export type PostsContainerProsType = {
-    dataForPostsContainer: profilePageType
-    dispatch: (v: Action) => void
-}
+// export type PostsContainerProsType = {
+//     // dataForPostsContainer: profilePageType
+//     // dispatch: (v: Action) => void
+// }
 export type PostPageProsType = {
     dataForPosts: profilePageType;
     addPostCallback: () => void
     onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export type profilePageTypeProps = {
-    profilePage: profilePageType;
-    dispatch: (v: Action) => void
-}
+// export type profilePageTypeProps = {
+//     // profilePage: profilePageType;
+//     // dispatch: (v: Action) => void
+// }
 
 
 export type stateType = {
@@ -81,10 +81,10 @@ export type StoreType = {
     getState: () => stateType
     dispatch: (v: Action) => void
 }
-export type RootStoreType = {
-    state: stateType
-    dispatch: (v: Action) => void
-}
+// export type RootStoreType = {
+//     // state: stateType
+//     // dispatch: (v: Action) => void
+// }
 
 // export const store2: StoreType = {
 //     _state: {

@@ -1,30 +1,23 @@
 import React, {ChangeEvent} from "react";
-import {
-    addPostActionCreator,
-    changeNewPostTextActionCreator,
-    clearPostActionCreator,
-    PostsContainerProsType
-} from "../../../Redux/Store";
+import {addPostActionCreator, changeNewPostTextActionCreator, clearPostActionCreator} from "../../../Redux/Store";
 import {Posts} from "./Posts";
+import {connect} from "react-redux";
 
 
-export const PostsContainer: React.FC<PostsContainerProsType> = (props) => {
-
-
-    const addPostCallback = () => {
-        props.dispatch(addPostActionCreator())
-        props.dispatch(clearPostActionCreator())
+let mapStateToProps = (state: any) => {
+    return {
+        dataForPosts: state.profilePage
     }
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(changeNewPostTextActionCreator(e.currentTarget.value))
-    }
-
-
-    return (
-        <Posts dataForPosts={props.dataForPostsContainer}
-               addPostCallback={addPostCallback}
-               onChangeCallback={onChangeCallback}
-        />
-
-    )
 }
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        addPostCallback: () => {
+            dispatch(addPostActionCreator())
+            dispatch(clearPostActionCreator())
+        },
+        onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => {
+            dispatch(changeNewPostTextActionCreator(e.currentTarget.value))
+        }
+    }
+}
+export const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)

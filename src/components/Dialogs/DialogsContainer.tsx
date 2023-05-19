@@ -1,30 +1,23 @@
 import React, {ChangeEvent} from "react";
-import {
-    changeNewTextMessageActionCreator,
-    messagesContainerTypeProps,
-    sendNewMessageActionCreator
-} from "../../Redux/Store";
+import {changeNewTextMessageActionCreator, sendNewMessageActionCreator} from "../../Redux/Store";
 import {Dialogs} from "./Dialogs";
+import {connect} from "react-redux";
 
 
-export const DialogsContainer: React.FC<messagesContainerTypeProps> = (props) => {
-
-
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(changeNewTextMessageActionCreator(e.currentTarget.value))
+let mapStateToProps = (state: any) => {
+    return {
+        messagesPage: state.messagesPage
     }
-
-    const onclickHandler = () => {
-        props.dispatch(sendNewMessageActionCreator())
-    }
-
-    return (
-
-
-
-<Dialogs messagesPage={props.messagesPage}
-         addMessageCallback={onclickHandler}
-         onChangeCallback={onChangeHandler}/>
-
-    )
 }
+let mapDispatchToProps = (dispatch: any) => {
+    return {
+        addMessageCallback: () => {
+            dispatch(sendNewMessageActionCreator())
+        },
+        onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => {
+            dispatch(changeNewTextMessageActionCreator(e.currentTarget.value))
+        }
+    }
+}
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

@@ -10,6 +10,7 @@ import {
 
 
 export const Posts: React.FC<PostPageProsType> = (props) => {
+    console.log(props)
 
     const newpostLists = props.dataForPosts.posts.map(elem => <Post key={elem.id} id={elem.id} post={elem.post} likes={elem.likes}/>)
 
