@@ -30,11 +30,17 @@ const initialState = {
                 post: action.textPost,
                 likes: 0,
             }
-            state.posts.push(newPost)
+            return   {
+                ...state,
+                posts: [...state.posts, newPost]
+            }
         } else if (action.type === "CLEAR-POST") {
             state.newPosts = ""
         } else if (action.type === CHANGE_NEW_POST_TEST) {
-            state.newPosts = action.newTextPost
+            return {
+                ...state,
+                newPosts: action.newTextPost
+            }
         }
         return state
     }

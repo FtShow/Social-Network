@@ -20,10 +20,6 @@ export let rerenderEntreTree = (state: any) => {
 
 rerenderEntreTree(store.getState())
 
-store.subscribe(() => {
-
-    rerenderEntreTree(store.getState())
-})
 
 
 // //БЫЛО
