@@ -22,25 +22,32 @@ const initialState = {
 
     }
 
-    export const ProfileReducer = (state: profilePageType = initialState, action: Action) => {
-
-        if (action.type === ADD_POST) {
+export const ProfileReducer = (state: profilePageType = initialState, action: Action) => {
+    switch (action.type) {
+        case ADD_POST:
             const newPost = {
                 id: state.posts.length + 1,
                 post: action.textPost,
                 likes: 0,
-            }
-            return   {
-                ...state,
-                posts: [...state.posts, newPost]
-            }
-        } else if (action.type === "CLEAR-POST") {
-            state.newPosts = ""
-        } else if (action.type === CHANGE_NEW_POST_TEST) {
+            };
             return {
                 ...state,
-                newPosts: action.newTextPost
-            }
-        }
-        return state
+                posts: [...state.posts, newPost],
+            };
+
+        case "CLEAR-POST":
+            return {
+                ...state,
+                newPosts: "",
+            };
+
+        case CHANGE_NEW_POST_TEST:
+            return {
+                ...state,
+                newPosts: action.newTextPost,
+            };
+
+        default:
+            return state;
     }
+};
