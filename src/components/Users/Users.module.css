@@ -1,7 +1,21 @@
 
-.asa{
+.asa {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
+}
+
+.usersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 80%;
+    align-content: baseline;
+}
+
+.userContauner {
+    width: 120px;
+    height: 150px;
+
 }
