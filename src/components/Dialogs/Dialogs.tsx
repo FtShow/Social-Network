@@ -1,14 +1,8 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import s from "./Dialogs.module.css"
 import {DialogItem} from "./DialogsItem/DialogsItem";
 import {MessageText} from "./Messages/Messages";
-import {
-    changeNewTextMessageActionCreator,
-    dialogsItemType,
-    messagesPageTypeProps,
-    sendNewMessageActionCreator,
-    textMessageItemType
-} from "../../Redux/Store";
+import {dialogsItemType, messagesPageTypeProps, textMessageItemType} from "../../Redux/Store";
 
 
 export const Dialogs: React.FC<messagesPageTypeProps> = (props) => {
