@@ -1,7 +1,11 @@
-import React, {ChangeEvent} from "react";
-import {addPostActionCreator, changeNewPostTextActionCreator, clearPostActionCreator} from "../../../Redux/Store";
+import React from "react";
 import {Posts} from "./Posts";
 import {connect} from "react-redux";
+import {
+    addPostActionCreator,
+    changeNewPostTextActionCreator,
+    clearPostActionCreator, setUserProfile
+} from "../../../Redux/ProfileReduce";
 
 
 let mapStateToProps = (state: any) => {
@@ -9,15 +13,10 @@ let mapStateToProps = (state: any) => {
         dataForPosts: state.profilePage
     }
 }
-let mapDispatchToProps = (dispatch: any) => {
-    return {
-        addPostCallback: () => {
-            dispatch(addPostActionCreator())
-            dispatch(clearPostActionCreator())
-        },
-        onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => {
-            dispatch(changeNewPostTextActionCreator(e.currentTarget.value))
-        }
-    }
-}
-export const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
+
+export const PostsContainer = connect(mapStateToProps,
+    {
+        addPostActionCreator,
+        clearPostActionCreator,
+        changeNewPostTextActionCreator,
+    })(Posts)

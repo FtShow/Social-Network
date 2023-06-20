@@ -53,15 +53,14 @@ const initialState = {
 }
 
 export const MessagesReducer = (state: any = initialState, action: any) => {
-    console.log(action.newMessageBody)
+
     if (action.type === CHANGE_NEW_MESSAGE_BODY) {
         return {
             ...state,
             newMessageBody: action.newMessageBody
         }
     } else if (action.type === SEND_MESSAGE) {
-        console.log(action.newMessageBody)
-        const newMessage = {
+              const newMessage = {
             id: state.textMessage.length + 1,
             text: action.newMessageBody,
             yourMessage: Math.random() < 0.5
