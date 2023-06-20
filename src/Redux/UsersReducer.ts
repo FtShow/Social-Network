@@ -1,9 +1,10 @@
-import {Action, profilePageType} from "./Store";
-
-
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USER_COUNT = "SET_TOTAL_USER_COUNT"
+const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING"
+const FOLLOWING_IN_PROGRESS = "FOLLOWING_IN_PROGRESS"
 export type UsersStateItemType = {
     id: number
     photo: string
@@ -30,148 +31,23 @@ export type UsersStateItemType2 = {
     }
     uniqueUrlName: string | null
 }
-type UsersStateType2 = {
+export type UsersStateType2 = {
     users: UsersStateItemType2[]
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    isFetching: boolean
+    followingInProgress: boolean
+
 }
 
-// const initialState: UsersStateType = {
-//     users: [
-//         {
-//             id: 1,
-//             fullName: "John Smith",
-//             status: "Web Developer",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "New York",
-//                 country: "USA"
-//             }
-//         },
-//         {
-//             id: 2,
-//             fullName: "Jane Doe",
-//             status: "UX Designer",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "San Francisco",
-//                 country: "USA"
-//             }
-//         },
-//         {
-//             id: 3,
-//             fullName: "Alex Johnson",
-//             status: "Software Engineer",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: false,
-//             location: {
-//                 city: "London",
-//                 country: "UK"
-//             }
-//         },
-//         {
-//             id: 4,
-//             fullName: "Maria Rodriguez",
-//             status: "Sales Manager",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: false,
-//             location: {
-//                 city: "Madrid",
-//                 country: "Spain"
-//             }
-//         },
-//         {
-//             id: 5,
-//             fullName: "Andrea Rossi",
-//             status: "Marketing Specialist",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "Rome",
-//                 country: "Italy"
-//             }
-//         },
-//         {
-//             id: 6,
-//             fullName: "Takashi Yamada",
-//             status: "Product Manager",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "Tokyo",
-//                 country: "Japan"
-//             }
-//         },
-//         {
-//             id: 7,
-//             fullName: "Anna Koval",
-//             status: "Graphic Designer",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "Kyiv",
-//                 country: "Ukraine"
-//             }
-//         },
-//         {
-//             id: 8,
-//             fullName: "Peter Müller",
-//             status: "Front-end Developer",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: false,
-//             location: {
-//                 city: "Berlin",
-//                 country: "Germany"
-//             }
-//         },
-//         {
-//             id: 9,
-//             fullName: "Sophie Dubois",
-//             status: "Account Manager",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "Paris",
-//                 country: "France"
-//             }
-//         },
-//         {
-//             id: 10,
-//             fullName: "Chen Wei",
-//             status: "Data Scientist",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: false,
-//             location: {
-//                 city: "Shanghai",
-//                 country: "China"
-//             }
-//         },
-//         {
-//             id: 11,
-//             fullName: "Mikhail Ivanov",
-//             status: "Back-end Developer",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: true,
-//             location: {
-//                 city: "Moscow",
-//                 country: "Russia"
-//             }
-//         },
-//         {
-//             id: 12,
-//             fullName: "Lucia Gomez",
-//             status: "Social Media Manager",
-//             photo: 'https://i.pinimg.com/originals/09/e1/7f/09e17f610a8a883fb6ecbe768ab72c39.png',
-//             followed: false,
-//             location: {
-//                 city: "Buenos Aires",
-//                 country: "Argentina"
-//             }
-//         }
-//     ]
-// }
 const initialState: UsersStateType2 = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: false
 }
 
 export const UsersReducer = (state: UsersStateType2 = initialState, action: actionUserReducerType): UsersStateType2 => {
@@ -190,44 +66,55 @@ export const UsersReducer = (state: UsersStateType2 = initialState, action: acti
         }
         case SET_USERS: {
             return {
-
-                ...state, users: [...state.users, ...action.payload.users]
+                ...state, users: action.payload.users
             }
         }
+        case SET_CURRENT_PAGE: {
+            return {
+                ...state,
+                currentPage: action.payload.page
+            }
+        }
+        case SET_TOTAL_USER_COUNT: {
+            return {
+                ...state,
+                totalUsersCount: action.payload.count
+            }
+        }
+        case TOGGLE_IS_FETCHING: {
+            return {
+                ...state,
+                isFetching: action.payload.isFetching
+            }
+
+        }
+        case FOLLOWING_IN_PROGRESS:
+            console.log("action.isFetching")
+            console.log(action.isFetching)
+            return {...state, followingInProgress: action.isFetching}
 
         default:
             return state;
     }
 };
-// export const UsersReducer = (state: UsersStateType = initialState, action: actionUserReducerType): UsersStateType => {
-//     switch (action.type) {
-//         case FOLLOW: {
-//             return {
-//                 ...state,
-//                 users: state.users.map(user=> user.id === action.payload.userID ? {...user, followed: true} : user)
-//             }
-//         }
-//         case UNFOLLOW: {
-//             return {
-//                 ...state,
-//                 users: state.users.map(user=> user.id === action.payload.userID ? {...user, followed: false} : user)
-//             }
-//         }
-//         case SET_USERS: {
-//             return {
-//                 ...state, users: [...state.users, action.payload.users]
-//             }
-//         }
-//
-//         default:
-//             return state;
-//     }
-// };
-type actionUserReducerType = followACType | unFollowACType | setUserAC
-type followACType = ReturnType<typeof followAC>
-type unFollowACType = ReturnType<typeof unFollowAC>
-type setUserAC = ReturnType<typeof setUserAC>
-export const followAC = (userID: number) => {
+type actionUserReducerType =
+    followACType
+    | unFollowACType
+    | setUserType
+    | setCurrentPageType
+    | setTotalUserCountType
+    | setIsFetchingType
+    | setFollowingInProgressType
+
+type followACType = ReturnType<typeof follow>
+type unFollowACType = ReturnType<typeof unFollow>
+type setUserType = ReturnType<typeof setUsers>
+type setCurrentPageType = ReturnType<typeof setCurrentPage>
+type setTotalUserCountType = ReturnType<typeof setTotalUserCount>
+type setIsFetchingType = ReturnType<typeof setIsFetching>
+type setFollowingInProgressType = ReturnType<typeof setFollowingInProgress>
+
+export const follow = (userID: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -235,7 +122,8 @@ export const followAC = (userID: number) => {
         }
     } as const
 }
-export const unFollowAC = (userID: number) => {
+
+export const unFollow = (userID: number) => {
     return {
         type: UNFOLLOW,
         payload: {
@@ -243,12 +131,50 @@ export const unFollowAC = (userID: number) => {
         }
     } as const
 }
-export const setUserAC = (users: any) => {
+
+export const setUsers = (users: any) => {
     return {
         type: SET_USERS,
         payload: {
             users
         }
+
+    } as const
+}
+
+export const setCurrentPage = (page: number) => {
+    return {
+        type: SET_CURRENT_PAGE,
+        payload: {
+            page
+        }
+
+    } as const
+}
+
+export const setTotalUserCount = (count: number) => {
+    return {
+        type: SET_TOTAL_USER_COUNT,
+        payload: {
+            count
+        }
+
+    } as const
+}
+
+export const setIsFetching = (isFetching: boolean) => {
+    return {
+        type: TOGGLE_IS_FETCHING,
+        payload: {
+            isFetching
+        }
+    } as const
+
+}
+export const setFollowingInProgress = (isFetching: boolean) => {
+    return {
+        type: FOLLOWING_IN_PROGRESS,
+        isFetching
 
     } as const
 }

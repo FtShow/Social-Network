@@ -19,3 +19,12 @@
     height: 150px;
 
 }
+
+.pageNum{
+    width: 100%;
+
+}
+.active{
+    font-weight: bold;
+    font-size: 1.2em;
+}

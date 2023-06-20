@@ -1,25 +1,39 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Users} from "./Users";
-import {followAC, setUserAC, unFollowAC, UsersStateItemType2} from "../../Redux/UsersReducer";
+import {
+    follow,
+    setCurrentPage,
+    setFollowingInProgress,
+    setIsFetching,
+    setTotalUserCount,
+    setUsers,
+    unFollow
+} from "../../Redux/UsersReducer";
+import {UsersApiContainer} from "./UsersAPIContainer";
 
 const mapStateToProps = (state: any) => {
     return {
-        users: state.userPage.users
-    }
-}
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        followCallback: (userID: number) => {
-            dispatch(followAC(userID))
-        },
-        unFollowCallback: (userID: number) => {
-            dispatch(unFollowAC(userID))
-        },
-        setUsers: (users: UsersStateItemType2[]) => {
-            dispatch(setUserAC(users))
-        }
+        users: state.userPage.users,
+        pageSize: state.userPage.pageSize,
+        totalUsersCount: state.userPage.totalUsersCount,
+        currentPage: state.userPage.currentPage,
+        isFetching: state.userPage.isFetching,
+        followingInProgress: state.userPage.followingInProgress
+
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+
+export const UsersContainer = connect(mapStateToProps,
+    {follow,
+        unFollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUserCount,
+        setIsFetching,
+        setFollowingInProgress}
+)(UsersApiContainer)
+
+
+
+
