@@ -1,7 +1,26 @@
 import s from "./ProfileInfo.module.css";
 import React from "react";
+import {Preloader} from "../../../../Assets/Preloader";
+type ProfileInfoType = {
+    profile: {
+        aboutMe: string
+        contacts: any
+        fullName: string
+        lookingForAJob: boolean
+        lookingForAJobDescription : string
+        photos : {
+            small: string,
+            large: string
+        }
+        userId: number
 
-export const ProfileInfo = () => {
+    }
+}
+
+export const ProfileInfo: React.FC<ProfileInfoType> = ({profile}) => {
+       if (!profile) {
+        return <Preloader/>
+    }
     return (<>
             <div className={s.topBanner}>
                 <img
@@ -10,11 +29,14 @@ export const ProfileInfo = () => {
             </div>
             <div className={s.userInfo}>
                 <img
-                    src="https://bipbap.ru/wp-content/uploads/2022/11/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg"
+                    src = {profile.photos.large || "https://bipbap.ru/wp-content/uploads/2022/11/1652235714_41-kartinkin-net-p-prikolnie-kartinki-dlya-stima-44.jpg"}
                     alt=""/>
                 <div className={s.userInfoData}>
-                    <h3>Name</h3>
-                    <span>Info</span>
+                    <h3>{profile.fullName}</h3>
+                    <span>{profile.aboutMe}</span>
+                    <br/>
+                    <span>Ищу работу: {profile.lookingForAJob ? 'Yes' : 'no'}</span>
+
                 </div>
             </div>
         </>
