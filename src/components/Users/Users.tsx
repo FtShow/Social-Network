@@ -2,7 +2,8 @@ import React from "react";
 import {UsersStateItemType2} from "../../Redux/UsersReducer";
 import us from "./Users.module.css"
 import {NavLink} from "react-router-dom";
-import {requestFollow, requestUnFollow} from "../../Redux/Api";
+import {ThunkAction} from "redux-thunk";
+import {RootStateType} from "../../Redux/Redux-Store";
 
 
 type UsersType = {
@@ -15,10 +16,13 @@ type UsersType = {
     unFollowCallback: (userID: number) => void
     followingInProgress: boolean
     setFollowingInProgress: (v: boolean)=>void
+    followTC: (userId: number) => ThunkAction<void, RootStateType, unknown, any>
+    unFollowTC: (userId: number) => ThunkAction<void, RootStateType, unknown, any>
 
 }
 
 export const Users = (props: UsersType) => {
+    props.setFollowingInProgress(true)
 
     return (
         <div className={us.usersContainer}>
@@ -40,27 +44,12 @@ export const Users = (props: UsersType) => {
                         {user.followed ? (
                             <button disabled={props.followingInProgress} onClick={() => {
 
-                                props.setFollowingInProgress(true)
-                                requestUnFollow(user.id)
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
-                                            props.unFollowCallback(user.id);
-                                        }
-                                        props.setFollowingInProgress(false)
-                                    });
-
+                                props.followTC(user.id)
 
                             }}>FOLLOW</button>
                         ) : (
                             <button disabled={props.followingInProgress} onClick={() => {
-                                props.setFollowingInProgress(true)
-                                requestFollow(user.id)
-                                    .then(response => {
-                                        if (response.data.resultCode === 0) {
-                                            props.followCallback(user.id);
-                                        }
-                                        props.setFollowingInProgress(false)
-                                    });
+                              props.unFollowTC(user.id)
 
 
                             }}>UNFOLLOW</button>
@@ -77,5 +66,4 @@ export const Users = (props: UsersType) => {
             ))}
         </div>
     );
-
 }

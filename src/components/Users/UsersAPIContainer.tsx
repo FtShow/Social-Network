@@ -1,10 +1,19 @@
 import React from "react";
-import {setFollowingInProgress, UsersStateItemType2} from "../../Redux/UsersReducer";
+import {
+    followTC,
+    getUsersThunkCreator,
+    setFollowingInProgress,
+    unFollowTC,
+    UsersStateItemType2
+} from "../../Redux/UsersReducer";
 import axios from "axios";
 import {Users} from "./Users";
 import preloader from "../../Assets/Images/preloader.svg"
 import {Preloader} from "../../Assets/Preloader";
 import {getUsers} from "../../Redux/Api";
+import {ThunkAction} from "redux-thunk";
+import {RootStateType} from "../../Redux/Redux-Store";
+import {Action} from "redux";
 
 type UsersType = {
     users: UsersStateItemType2[],
@@ -20,6 +29,9 @@ type UsersType = {
     isFetching: boolean
     followingInProgress: boolean
     setFollowingInProgress: (v: boolean)=>void
+    getUsersThunkCreator: (v1: number, v2: number) => ThunkAction<void, RootStateType, unknown, any>
+    followTC: (userId: number) => ThunkAction<void, RootStateType, unknown, any>
+    unFollowTC: (userId: number) => ThunkAction<void, RootStateType, unknown, any>
 }
 
 export class UsersApiContainer extends React.Component<UsersType, any> {
@@ -29,29 +41,17 @@ export class UsersApiContainer extends React.Component<UsersType, any> {
     }
 
     componentDidMount() {
-        this.props.setIsFetching(true)
-        console.log(this.props.setFollowingInProgress)
-        getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(data.items);
-                this.props.setTotalUserCount(data.totalCount);
-            });
+        this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
     }
 
     onPageChanged = (page: number) => {
         this.props.setCurrentPage(page)
-        this.props.setIsFetching(true)
-        getUsers(page, this.props.pageSize)
-            .then(data => {
-                this.props.setIsFetching(false)
-                this.props.setUsers(data.items);
-            });
+        this.props.getUsersThunkCreator(page, this.props.pageSize)
     }
 
     render() {
         let pages = []
-        for (let i = 1; i <= 120; i++) {
+        for (let i = 1; i <= 30; i++) {
             pages.push(i)
         }
         return (
@@ -66,6 +66,8 @@ export class UsersApiContainer extends React.Component<UsersType, any> {
                            unFollowCallback={this.props.unFollow}
                            followingInProgress={this.props.followingInProgress}
                            setFollowingInProgress={this.props.setFollowingInProgress}
+                           followTC={this.props.followTC}
+                           unFollowTC={this.props.unFollowTC}
 
                     />}
             </>
