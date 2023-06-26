@@ -1,6 +1,7 @@
 import s from "./ProfileInfo.module.css";
 import React from "react";
 import {Preloader} from "../../../../Assets/Preloader";
+import {log} from "util";
 type ProfileInfoType = {
     profile: {
         aboutMe: string
@@ -21,6 +22,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile}) => {
        if (!profile) {
         return <Preloader/>
     }
+    console.log(profile.userId)
     return (<>
             <div className={s.topBanner}>
                 <img
