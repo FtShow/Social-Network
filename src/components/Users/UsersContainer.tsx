@@ -1,13 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    follow,
+    follow, followTC, getUsersThunkCreator,
     setCurrentPage,
     setFollowingInProgress,
     setIsFetching,
     setTotalUserCount,
     setUsers,
-    unFollow
+    unFollow, unFollowTC
 } from "../../Redux/UsersReducer";
 import {UsersApiContainer} from "./UsersAPIContainer";
 
@@ -19,7 +19,6 @@ const mapStateToProps = (state: any) => {
         currentPage: state.userPage.currentPage,
         isFetching: state.userPage.isFetching,
         followingInProgress: state.userPage.followingInProgress
-
     }
 }
 
@@ -31,7 +30,11 @@ export const UsersContainer = connect(mapStateToProps,
         setCurrentPage,
         setTotalUserCount,
         setIsFetching,
-        setFollowingInProgress}
+        setFollowingInProgress,
+        getUsersThunkCreator,
+        followTC,
+        unFollowTC,
+    }
 )(UsersApiContainer)
 
 

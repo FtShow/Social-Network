@@ -1,3 +1,5 @@
+import {getUsers, requestFollow, requestUnFollow} from "./Api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -15,10 +17,6 @@ export type UsersStateItemType = {
         city: string
         country: string
     }
-}
-
-type UsersStateType = {
-    users: UsersStateItemType[]
 }
 export type UsersStateItemType2 = {
     id: number
@@ -40,10 +38,9 @@ export type UsersStateType2 = {
     followingInProgress: boolean
 
 }
-
 const initialState: UsersStateType2 = {
     users: [],
-    pageSize: 5,
+    pageSize: 14,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
@@ -89,7 +86,6 @@ export const UsersReducer = (state: UsersStateType2 = initialState, action: acti
 
         }
         case FOLLOWING_IN_PROGRESS:
-            console.log("action.isFetching")
             console.log(action.isFetching)
             return {...state, followingInProgress: action.isFetching}
 
@@ -122,7 +118,6 @@ export const follow = (userID: number) => {
         }
     } as const
 }
-
 export const unFollow = (userID: number) => {
     return {
         type: UNFOLLOW,
@@ -131,7 +126,6 @@ export const unFollow = (userID: number) => {
         }
     } as const
 }
-
 export const setUsers = (users: any) => {
     return {
         type: SET_USERS,
@@ -141,7 +135,6 @@ export const setUsers = (users: any) => {
 
     } as const
 }
-
 export const setCurrentPage = (page: number) => {
     return {
         type: SET_CURRENT_PAGE,
@@ -151,7 +144,6 @@ export const setCurrentPage = (page: number) => {
 
     } as const
 }
-
 export const setTotalUserCount = (count: number) => {
     return {
         type: SET_TOTAL_USER_COUNT,
@@ -161,7 +153,6 @@ export const setTotalUserCount = (count: number) => {
 
     } as const
 }
-
 export const setIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCHING,
@@ -178,3 +169,34 @@ export const setFollowingInProgress = (isFetching: boolean) => {
 
     } as const
 }
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (dispatch: any) => {
+    dispatch(setIsFetching(true));
+    getUsers(currentPage, pageSize)
+        .then(data => {
+            dispatch(setIsFetching(false))
+            dispatch(setUsers(data.items));
+            dispatch(setTotalUserCount(data.totalCount));
+        });
+}
+export const followTC = (userId: number) => (dispatch: any) => {
+    dispatch(setFollowingInProgress(true));
+    requestUnFollow(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unFollow(userId));
+            }
+            dispatch(setFollowingInProgress(false));
+        });
+}
+export const unFollowTC = (userId: number) => (dispatch: any) => {
+    dispatch(setFollowingInProgress(true));
+    requestFollow(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(follow(userId));
+            }
+            dispatch(setFollowingInProgress(false));
+        });
+}
+
