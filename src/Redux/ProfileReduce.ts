@@ -1,3 +1,5 @@
+import {UserAPI} from "./Api";
+
 const ADD_POST = "ADD_POST";
 const CHANGE_NEW_POST_TEXT = "CHANGE_NEW_POST_TEXT";
 const CLEAR_POST = "CLEAR_POST";
@@ -91,6 +93,12 @@ export const setUserProfile = (profile: any) => {
         profile
     } as const
 }
+export const getUserProfileTC = (userId: number | string) => (dispatch: any) =>{
+    UserAPI.getProfile(userId)
+        .then(res => dispatch(setUserProfile(res.data)))
+}
+
+
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>;
 type ClearPostActionType = ReturnType<typeof clearPostActionCreator>;

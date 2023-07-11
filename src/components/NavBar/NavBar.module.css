@@ -25,7 +25,7 @@ a.active{
     align-items: center;
     flex-wrap: wrap;
     padding: 10px 0;
-    background-color: #61dafb;
+    background-color: rgba(103, 115, 168, 0.33);
     border-radius: 5%;
 }
 
@@ -33,6 +33,6 @@ a.active{
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: red;
+    background-color: rgba(112, 157, 112, 0.29);
     margin: 5px;
 }
