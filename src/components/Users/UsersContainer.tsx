@@ -21,7 +21,6 @@ const mapStateToProps = (state: any) => {
         followingInProgress: state.userPage.followingInProgress
     }
 }
-0
 
 export const UsersContainer = connect(mapStateToProps,
     {follow,

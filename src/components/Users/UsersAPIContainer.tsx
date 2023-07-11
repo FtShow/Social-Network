@@ -1,19 +1,9 @@
 import React from "react";
-import {
-    followTC,
-    getUsersThunkCreator,
-    setFollowingInProgress,
-    unFollowTC,
-    UsersStateItemType2
-} from "../../Redux/UsersReducer";
-import axios from "axios";
+import {UsersStateItemType2} from "../../Redux/UsersReducer";
 import {Users} from "./Users";
-import preloader from "../../Assets/Images/preloader.svg"
 import {Preloader} from "../../Assets/Preloader";
-import {getUsers} from "../../Redux/Api";
 import {ThunkAction} from "redux-thunk";
 import {RootStateType} from "../../Redux/Redux-Store";
-import {Action} from "redux";
 
 type UsersType = {
     users: UsersStateItemType2[],

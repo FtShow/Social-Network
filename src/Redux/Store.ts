@@ -23,11 +23,7 @@ export type messagesPageType = {
     textMessage: textMessageItemType[]
     newMessageBody: string | undefined
 }
-export type messagesPageTypeProps = {
-    messagesPage: messagesPageType
-    onChangeCallback: (e: ChangeEvent<HTMLInputElement>) => void
-    addMessageCallback: () => void
-}
+
 export type messagesContainerTypeProps = {
     // messagesPage: messagesPageType
     // dispatch: (v: Action) => void
