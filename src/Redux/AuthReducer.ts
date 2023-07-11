@@ -1,3 +1,5 @@
+import {AuthAPI} from "./Api";
+
 const SET_USER_DATA = "SET_USER_DATA"
 type initStateType = {
     userId: number | string | null,
@@ -37,4 +39,13 @@ export const setAuthUserData = (userId: string | number, email: string, login: s
         } as const
 
     }
+}
+
+export const getAuthUserDataTC = () => (dispatch: any) =>{
+    AuthAPI.me()
+        .then(response => {
+            let {id, email, login} = response.data.data
+            response.data.resultCode === 0 ? dispatch(setAuthUserData(id, email, login)): console.log("NOT")
+        });
+
 }
