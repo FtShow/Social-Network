@@ -10,6 +10,9 @@ import {
     unFollow, unFollowTC
 } from "../../Redux/UsersReducer";
 import {UsersApiContainer} from "./UsersAPIContainer";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
+import {Dialogs} from "../Dialogs/Dialogs";
 
 const mapStateToProps = (state: any) => {
     return {
@@ -22,20 +25,19 @@ const mapStateToProps = (state: any) => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps,
-    {follow,
-        unFollow,
-        setUsers,
-        setCurrentPage,
-        setTotalUserCount,
-        setIsFetching,
-        setFollowingInProgress,
-        getUsersThunkCreator,
-        followTC,
-        unFollowTC,
-    }
-)(UsersApiContainer)
 
-
-
-
+export default compose<React.FC>(
+    withAuthRedirect,
+    connect(mapStateToProps,
+        {follow,
+            unFollow,
+            setUsers,
+            setCurrentPage,
+            setTotalUserCount,
+            setIsFetching,
+            setFollowingInProgress,
+            getUsersThunkCreator,
+            followTC,
+            unFollowTC,
+        }))
+(UsersApiContainer)

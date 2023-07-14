@@ -1,6 +1,5 @@
 import {Redirect, RouteComponentProps} from "react-router-dom";
 import React from "react";
-import {ProfileContainer} from "../components/Profile/ProfileContainer";
 import {RootStateType} from "../Redux/Redux-Store";
 import {connect} from "react-redux";
 
