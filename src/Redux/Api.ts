@@ -19,10 +19,12 @@ export const UserAPI = {
     requestUnFollow(id: number) {
         return instance.delete(`follow/${id}`)
     },
-
     getProfile(userId: number | string) {
-        return instance.get(`profile/${userId}`)
+        console.log('поменяй апи')
+        return ProfileAPI.getProfile(userId)
     },
+
+
 }
 
 export const AuthAPI = {
@@ -31,4 +33,16 @@ export const AuthAPI = {
             withCredentials: true
         })
     }
+}
+
+export const ProfileAPI = {
+    getProfile(userId: number | string) {
+        return instance.get(`profile/${userId}`)
+    },
+    getStatus(userId: number | string){
+        return instance.get(`profile/status/${userId}`)
+    },
+    updateStatus(newStatus: string){
+        return instance.put(`profile/status`, {status: newStatus})
+    },
 }

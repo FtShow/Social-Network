@@ -10,9 +10,9 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import {ProfileAPI} from "./Redux/Api";
 
 function App() {
-
 
     return (
         <BrowserRouter>
@@ -20,7 +20,7 @@ function App() {
                 <HeaderContainer/>
                 <div className="main-section">
                     <NavBar/>
-                    <Route path="/Profile/:userId?" render={(props) => <ProfileContainer/>}/>
+                    <Route path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
                     <Route path="/Login" component={Login}/>
                     <Route path="/News" component={News}/>
