@@ -1,9 +1,11 @@
-import {UserAPI} from "./Api";
+import {ProfileAPI, UserAPI} from "./Api";
 
 const ADD_POST = "ADD_POST";
 const CHANGE_NEW_POST_TEXT = "CHANGE_NEW_POST_TEXT";
 const CLEAR_POST = "CLEAR_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS"
+const UPDATE_STATUS = "UPDATE_STATUS"
 export type postsItemType = {
     id: number,
     post: string | undefined
@@ -15,6 +17,7 @@ export type profilePageType = {
     posts: postsItemType[];
     newPosts: string | undefined
     profile: any
+    status: string
 
 }
 
@@ -32,7 +35,8 @@ const initialState: profilePageType = {
         {id: 10, post: "Tenth post", likes: 12},
     ],
     newPosts: "",
-    profile: null
+    profile: null,
+    status: ''
 }
 
 export const ProfileReducer = (state: profilePageType = initialState, action: ProfileActionTypes): profilePageType => {
@@ -63,9 +67,20 @@ export const ProfileReducer = (state: profilePageType = initialState, action: Pr
                 newPosts: action.newTextPost
             };
         case SET_USER_PROFILE:
-        return {
-            ...state,
-            profile: action.profile,
+            return {
+                ...state,
+                profile: action.profile,
+            }
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
+        case UPDATE_STATUS:{
+            return {
+                ...state,
+                status: action.newStatus
+            }
         }
 
         default:
@@ -75,9 +90,21 @@ export const ProfileReducer = (state: profilePageType = initialState, action: Pr
 
 
 export const addPostActionCreator = (textPost: string) => {
-       return {
+    return {
         type: ADD_POST,
         textPost
+    } as const
+}
+export const setStatus = (status: string) => {
+    return {
+        type: SET_STATUS,
+        status
+    } as const
+}
+export const updateStatus = (newStatus: string) => {
+    return {
+        type: UPDATE_STATUS,
+        newStatus
     } as const
 }
 export const clearPostActionCreator = () => ({type: CLEAR_POST} as const)
@@ -93,23 +120,39 @@ export const setUserProfile = (profile: any) => {
         profile
     } as const
 }
-export const getUserProfileTC = (userId: number | string) => (dispatch: any) =>{
+
+export const getUserProfileTC = (userId: number | string) => (dispatch: any) => {
     UserAPI.getProfile(userId)
         .then(res => dispatch(setUserProfile(res.data)))
 }
 
+export const setStatusTS = (userId: string | number) => (dispatch: any) => {
+    ProfileAPI.getStatus(userId)
+        .then(res => {
+            console.log(res)
+            dispatch(setStatus(res.data))
+        })
+}
+
+export const updateStatusTC = (newStatus: string) => (dispatch: any) => {
+    ProfileAPI.updateStatus(newStatus)
+        .then(res => dispatch(updateStatus(newStatus)))
+}
 
 
 type AddPostActionType = ReturnType<typeof addPostActionCreator>;
 type ClearPostActionType = ReturnType<typeof clearPostActionCreator>;
 type ChangeNewPostTextActionType = ReturnType<typeof changeNewPostTextActionCreator>;
 type setUserProfileType = ReturnType<typeof setUserProfile>;
+type setStatusType = ReturnType<typeof setStatus>;
+type updateStatusType = ReturnType<typeof updateStatus>;
 
 
 type ProfileActionTypes =
-    AddPostActionType
+    | AddPostActionType
     | ClearPostActionType
     | ChangeNewPostTextActionType
     | setUserProfileType
-
+    | setStatusType
+    | updateStatusType
 

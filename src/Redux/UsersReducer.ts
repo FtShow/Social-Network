@@ -86,7 +86,6 @@ export const UsersReducer = (state: UsersStateType2 = initialState, action: acti
 
         }
         case FOLLOWING_IN_PROGRESS:
-            console.log(action.isFetching)
             return {...state, followingInProgress: action.isFetching}
 
         default:
