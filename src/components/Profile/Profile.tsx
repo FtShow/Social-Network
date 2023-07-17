@@ -7,12 +7,14 @@ import {Redirect} from "react-router-dom";
 type ProfileType = {
     profile: any,
     setUserProfile?: (profile: any) => void
+    status?: string
+    updateStatus: (newStatus: string)=>void
 }
 
 export const Profile: React.FC<ProfileType> = (props) => {
     return (
         <div className={s.profile}>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile} status={props.status || 'default status'} updateStatus={props.updateStatus}/>
             <PostsContainer/>
         </div>
 
