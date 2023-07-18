@@ -1,4 +1,5 @@
-const CHANGE_NEW_MESSAGE_BODY = "CHANGE-NEW-MESSAGE-BODY";
+import {store} from "./Redux-Store";
+
 const SEND_MESSAGE = "SEND-MESSAGE";
 const initialState = {
     dialogs: [
@@ -49,18 +50,12 @@ const initialState = {
         {id: 5, text: "text3", yourMessage: true},
 
     ],
-    newMessageBody: "",
 }
 
 export const MessagesReducer = (state: any = initialState, action: any) => {
 
-    if (action.type === CHANGE_NEW_MESSAGE_BODY) {
-        return {
-            ...state,
-            newMessageBody: action.newMessageBody
-        }
-    } else if (action.type === SEND_MESSAGE) {
-              const newMessage = {
+    if (action.type === SEND_MESSAGE) {
+        const newMessage = {
             id: state.textMessage.length + 1,
             text: action.newMessageBody,
             yourMessage: Math.random() < 0.5
@@ -73,3 +68,8 @@ export const MessagesReducer = (state: any = initialState, action: any) => {
         return state;
     }
 }
+
+export const sendNewMessage = (newMessage: string) => ({
+    type: SEND_MESSAGE,
+    newMessageBody: newMessage
+})
