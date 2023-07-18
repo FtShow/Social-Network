@@ -1,10 +1,10 @@
 import s from "./Posts.module.css";
 import {Post} from "./Post/Post";
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {profilePageType} from "../../../Redux/Store";
-import {addPostActionCreator, clearPostActionCreator, setUserProfile} from "../../../Redux/ProfileReduce";
-import {store} from "../../../Redux/Redux-Store";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
+import {maxLengthCreator, required} from "../../../utils/validators/validator";
+import {ContainerTextArea} from "../../common/FormsControl/FormsControls";
 
 export type PostPageProsType = {
     dataForPosts: profilePageType;
@@ -20,8 +20,8 @@ export const Posts: React.FC<PostPageProsType> = (props) => {
 
     const onClickHandler = (values: formType) => {
         props.addPostActionCreator(values.textNewPost)
-
     }
+
     const newPostLists = props.dataForPosts.posts.map(elem => <Post key={elem.id} id={elem.id} post={elem.post}
                                                                     likes={elem.likes}/>)
 
@@ -35,12 +35,12 @@ export const Posts: React.FC<PostPageProsType> = (props) => {
         </>
     )
 }
-
+const maxLength30 = maxLengthCreator(30)
 const PostForm: React.FC<InjectedFormProps<formType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
-            <Field name={'textNewPost'} component={'input'} type="text"/>
-            <button> Send</button>
+            <Field name={'textNewPost'} validate={[required, maxLength30]} component={ContainerTextArea} type="text"/>
+            <button> Add post </button>
         </form>
     );
 };
