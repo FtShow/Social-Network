@@ -61,26 +61,35 @@ li a span {
     line-height: 2;
 }
 .messageArea{
-    width: 99%;
+    width: 100%;
     padding-left: 1%;
 }
-.messageArea input{
-    width: 90%;
+.textAreaS textarea{
+    width: 100%;
     height: 75px;
     background-color: rgb(86, 86, 91);
     border: 2px solid #838383;
     outline: none;
     border-radius: 1em;
+    resize: none;
     color: #dee0e3;
 }
-.messageArea button {
-    width: 8%;
+.textAreaS{
+    width: 99%;
+    padding: 1%;
+    resize: none;
+    display: flex;
+}
+.textAreaS button {
+    width: 10%;
     height: 81px;
     background-color: rgb(86, 86, 91);
     margin-left: 3px;
-
     border: 2px solid #838383;
     border-radius: 1em;
-
+}
+.textAreaS div {
+    width: 88%;
+    margin-right: 1%;
 }
 
