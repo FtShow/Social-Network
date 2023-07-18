@@ -1,7 +1,6 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import {sendNewMessage} from "../../Redux/DialogsReduce";
