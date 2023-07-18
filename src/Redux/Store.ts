@@ -4,8 +4,7 @@ import {ChangeEvent} from "react";
 import {addPostActionCreator, changeNewPostTextActionCreator, clearPostActionCreator} from "./ProfileReduce";
 
 
-const CHANGE_NEW_MESSAGE_BODY = "CHANGE-NEW-MESSAGE-BODY";
-const SEND_MESSAGE = "SEND-MESSAGE";
+
 
 
 export type dialogsItemType = {
@@ -165,11 +164,3 @@ export type StoreType = {
 
 
 
-export const changeNewTextMessageActionCreator = (text: string) => ({
-    type: CHANGE_NEW_MESSAGE_BODY,
-    newMessageBody: text
-})
-export const sendNewMessageActionCreator = () => ({
-    type: SEND_MESSAGE,
-    newMessageBody: store.getState().messagesPage.newMessageBody
-})
