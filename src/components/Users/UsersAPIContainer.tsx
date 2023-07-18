@@ -1,7 +1,7 @@
 import React from "react";
 import {UsersStateItemType2} from "../../Redux/UsersReducer";
 import {Users} from "./Users";
-import {Preloader} from "../../Assets/Preloader";
+import {Preloader} from "../common/Preloader/Preloader";
 import {ThunkAction} from "redux-thunk";
 import {RootStateType} from "../../Redux/Redux-Store";
 

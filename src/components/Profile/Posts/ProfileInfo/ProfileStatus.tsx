@@ -1,6 +1,6 @@
 import s from "./ProfileInfo.module.css";
 import React, {ChangeEvent} from "react";
-import {Preloader} from "../../../../Assets/Preloader";
+import {Preloader} from "../../../common/Preloader/Preloader";
 
 type ProfileStatusPropsType = {
     status: string
