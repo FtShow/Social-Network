@@ -19,7 +19,6 @@ type ProfileType = {
 class ProfileContainer extends React.Component<ProfileType & RouteComponentProps<{ userId: string }>> {
 
     componentDidMount() {
-        console.log(this.props.updateStatusTC)
         let userId = this.props.match.params.userId || this.props.authorID
         this.props.getUserProfileTC(userId)
         this.props.setStatusTS(userId)

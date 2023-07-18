@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {
     addPostActionCreator,
     changeNewPostTextActionCreator,
-    clearPostActionCreator, setUserProfile
+    clearPostActionCreator
 } from "../../../Redux/ProfileReduce";
 
 
