@@ -1,10 +1,24 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-
-export const Login = () => {
-    const onSubmitHandler = (formData: unknown) => {
-        console.log(formData)
+import {ContainerInput} from "../common/FormsControl/FormsControls";
+import {required} from "../../utils/validators/validator";
+import {connect} from "react-redux";
+import {login, logout} from "../../Redux/AuthReducer";
+import {RootStateType} from "../../Redux/Redux-Store";
+import {Redirect} from "react-router-dom";
+type LoginPropsType = {
+    isAuth: boolean
+    login:(email: string, password: string, rememberMe: boolean)=>void
+    logout: ()=>void
+}
+const Login:React.FC<LoginPropsType> = ({isAuth, login, logout}) => {
+    console.log(isAuth)
+    if(isAuth)return <Redirect to={'/profile'}/>
+    const onSubmitHandler = (formData: any) => {
+        login(formData.email, formData.password, formData.RememberMe)
+        //console.log(formData.login, formData.password, formData.RememberMe)
     }
+
     return (
         <div>
             <h1>LOGIN </h1>
@@ -20,8 +34,8 @@ type LoginFormType = {
 const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div><Field placeholder={'Login'} name={'login'} component={'input'}/></div>
-            <div><Field placeholder={'Password'} name={'password'} component={'input'}/></div>
+            <div><Field placeholder={'Login'} validate={[required]} name={'email'} component={ContainerInput}/></div>
+            <div><Field placeholder={'Password'} validate={[required]} name={'password'} type={'password'} component={ContainerInput}/></div>
             <div><Field type="checkbox" name={'RememberMe'} component={'input'}/> Remember me</div>
             <button>LOGIN</button>
         </form>
@@ -31,3 +45,11 @@ const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
 const LoginReduxForm = reduxForm<LoginFormType>({
     form: 'login',
 })(LoginForm)
+const mapStateToProps = (state: RootStateType) =>{
+    return {
+        isAuth: state.auth.isAuth
+    }
+}
+
+
+export default connect(mapStateToProps, {login, logout})(Login)
