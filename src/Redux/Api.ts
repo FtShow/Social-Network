@@ -19,10 +19,7 @@ export const UserAPI = {
     requestUnFollow(id: number) {
         return instance.delete(`follow/${id}`)
     },
-    getProfile(userId: number | string) {
-        console.log('поменяй апи')
-        return ProfileAPI.getProfile(userId)
-    },
+
 
 
 }
@@ -33,6 +30,7 @@ export const AuthAPI = {
             withCredentials: true
         })
     }
+
 }
 
 export const ProfileAPI = {

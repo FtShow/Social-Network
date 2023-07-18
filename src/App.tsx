@@ -10,9 +10,9 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import {Login} from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
-import {ProfileAPI} from "./Redux/Api";
 
 function App() {
+
 
     return (
         <BrowserRouter>
