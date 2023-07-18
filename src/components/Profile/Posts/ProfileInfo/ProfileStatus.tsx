@@ -4,12 +4,16 @@ import {Preloader} from "../../../../Assets/Preloader";
 
 type ProfileStatusPropsType = {
     status: string
-    updateStatus: (newStatus: string)=>void
+    updateStatus: (newStatus: string) => void
 }
 
 export class ProfileStatus extends React.Component<ProfileStatusPropsType, any> {
     componentDidMount() {
-        console.log(this.props)
+       // console.log(this.props)
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<any>, snapshot?: any) {
+        console.log('rednder')
     }
 
     state = {
@@ -23,7 +27,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, any> 
         })
         this.state.editMode && this.props.updateStatus(this.state.status)
     }
-    onStatusChange = (e: ChangeEvent<HTMLInputElement>) =>{
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         this.setState({
             status: e.currentTarget.value
         })

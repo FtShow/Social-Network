@@ -122,7 +122,7 @@ export const setUserProfile = (profile: any) => {
 }
 
 export const getUserProfileTC = (userId: number | string) => (dispatch: any) => {
-    UserAPI.getProfile(userId)
+    ProfileAPI.getProfile(userId)
         .then(res => dispatch(setUserProfile(res.data)))
 }
 

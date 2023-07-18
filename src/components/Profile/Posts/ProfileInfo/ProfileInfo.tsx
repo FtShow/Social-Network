@@ -25,7 +25,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateS
     if (!profile) {
         return <Preloader/>
     }
-    console.log(updateStatus)
     return (<>
             <div className={s.topBanner}>
                 <img
