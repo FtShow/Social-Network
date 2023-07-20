@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import {login, logout} from "../../Redux/AuthReducer";
 import {RootStateType} from "../../Redux/Redux-Store";
 import {Redirect} from "react-router-dom";
+import ls from './Login.module.css'
 type LoginPropsType = {
     isAuth: boolean
     login:(email: string, password: string, rememberMe: boolean)=>void
@@ -32,12 +33,16 @@ type LoginFormType = {
     RememberMe: boolean,
 }
 const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
+    console.log("ERROR")
+    console.log(props.error)
     return (
         <form onSubmit={props.handleSubmit}>
+            <div className={props.error && ls.globalErrorBlock}>{props.error}
             <div><Field placeholder={'Login'} validate={[required]} name={'email'} component={ContainerInput}/></div>
             <div><Field placeholder={'Password'} validate={[required]} name={'password'} type={'password'} component={ContainerInput}/></div>
             <div><Field type="checkbox" name={'RememberMe'} component={'input'}/> Remember me</div>
             <button>LOGIN</button>
+            </div>
         </form>
     );
 };
