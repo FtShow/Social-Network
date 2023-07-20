@@ -6,24 +6,19 @@ import App from "./App";
 
 import {store} from "./Redux/Redux-Store";
 import {Provider} from "react-redux";
+import {BrowserRouter} from "react-router-dom";
 
 
-export let rerenderEntreTree = (state: any) => {
+export let rerenderEntreTree = () => {
 
     ReactDOM.render(
-        <Provider store={store} >
-            <App/>
+        <Provider store={store}>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
         </Provider>,
-    document.getElementById('root')
+        document.getElementById('root')
     );
 }
 
-rerenderEntreTree(store.getState())
-
-
-
-// //БЫЛО
-// ReactDOM.render(
-//     <App state={state} addPost={addPost}/>,
-//     document.getElementById("root")
-// );
+rerenderEntreTree()
