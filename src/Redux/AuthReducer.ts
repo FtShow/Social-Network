@@ -44,9 +44,9 @@ export const setAuthUserData = (userId: string | number | null, email: string | 
 }
 
 export const getAuthUserDataTC = () => (dispatch: any) => {
-    AuthAPI.me()
+    console.log('START RESPONCE')
+   return AuthAPI.me()
         .then(response => {
-
             console.log(response.data)
             let {id, email, login} = response.data.data
             response.data.resultCode === 0 ? dispatch(setAuthUserData(id, email, login, true)) : console.log("NOT")
