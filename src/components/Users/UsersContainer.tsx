@@ -24,16 +24,6 @@ import {
     getUsers
 } from "../../Redux/usersSelectors/usersSelectors";
 
-// const mapStateToProps = (state: any) => {
-//     return {
-//         users: state.userPage.users,
-//         pageSize: state.userPage.pageSize,
-//         totalUsersCount: state.userPage.totalUsersCount,
-//         currentPage: state.userPage.currentPage,
-//         isFetching: state.userPage.isFetching,
-//         followingInProgress: state.userPage.followingInProgress
-//     }
-// }
 const mapStateToProps = (state: any) => {
     return {
         users: getUsers(state),

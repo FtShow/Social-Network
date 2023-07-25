@@ -1,5 +1,4 @@
 import React from "react";
-// import {profilePageTypeProps} from "../../Redux/Store";
 import {Profile} from "./Profile";
 import {getUserProfileTC, setStatusTS, updateStatusTC} from "../../Redux/ProfileReduce";
 import {connect} from "react-redux";
