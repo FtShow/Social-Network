@@ -1,7 +1,7 @@
 import React from "react";
 import {Header} from "./Header";
 import {connect} from "react-redux";
-import {getAuthUserDataTC, logout} from "../../Redux/AuthReducer";
+import {logout} from "../../Redux/AuthReducer";
 
 type HeaderContainerType = {
     login: string,

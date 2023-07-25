@@ -1,5 +1,4 @@
 import {getAuthUserDataTC} from "./AuthReducer";
-import {log} from "util";
 
 const SET_INITIALIZED = "SET_INITIALIZED"
 type initStateType = {
