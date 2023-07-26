@@ -2,6 +2,7 @@ import s from "./ProfileInfo.module.css";
 import React from "react";
 import {Preloader} from "../../../common/Preloader/Preloader";
 import {ProfileStatus} from "./ProfileStatus";
+import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 type ProfileInfoType = {
     profile: {
@@ -39,7 +40,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile, status, updateS
                     <h3>{profile.fullName}</h3>
                     <span> About Me: {profile.aboutMe}</span>
                     <br/>
-                    {"Status: "}<ProfileStatus status={status} updateStatus={updateStatus}/>
+                    {"Status: "}<ProfileStatusWithHooks status={status} updateStatus={updateStatus}/>
                     <br/>
                     <span>Ищу работу: {profile.lookingForAJob ? 'Yes' : 'no'}</span>
 
