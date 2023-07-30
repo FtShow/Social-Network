@@ -17,6 +17,11 @@ type formType = {
 }
 
 export class Posts extends React.Component<PostPageProsType> {
+
+    shouldComponentUpdate(nextProps: Readonly<PostPageProsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+        return nextProps != this.props && nextState !=this.state
+    }
+
     render() {
 
         const onClickHandler = (values: formType) => {
@@ -43,7 +48,7 @@ const PostForm: React.FC<InjectedFormProps<formType>> = ({handleSubmit}) => {
     return (
         <form onSubmit={handleSubmit}>
             <Field name={'textNewPost'} validate={[required, maxLength30]} component={ContainerTextArea} type="text"/>
-            <button> Add post </button>
+            <button> Add post</button>
         </form>
     );
 };
