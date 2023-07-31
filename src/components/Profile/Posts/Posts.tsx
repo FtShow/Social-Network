@@ -16,32 +16,25 @@ type formType = {
     textNewPost: string
 }
 
-export class Posts extends React.Component<PostPageProsType> {
+export const Posts = React.memo((props: PostPageProsType) => {
 
-    shouldComponentUpdate(nextProps: Readonly<PostPageProsType>, nextState: Readonly<{}>, nextContext: any): boolean {
-        return nextProps != this.props && nextState !=this.state
+    const onClickHandler = (values: formType) => {
+        props.addPostActionCreator(values.textNewPost)
     }
 
-    render() {
+    const newPostLists = props.dataForPosts.posts.map(elem => <Post key={elem.id} id={elem.id} post={elem.post}
+                                                                    likes={elem.likes}/>)
 
-        const onClickHandler = (values: formType) => {
-            this.props.addPostActionCreator(values.textNewPost)
-        }
-
-        const newPostLists = this.props.dataForPosts.posts.map(elem => <Post key={elem.id} id={elem.id} post={elem.post}
-                                                                             likes={elem.likes}/>)
-
-        return (
-            <>
-                <div className={s.newPost}>
-                    <h2>My Post</h2>
-                    <PostFormRedux onSubmit={onClickHandler}/>
-                </div>
-                {newPostLists.reverse()}
-            </>
-        )
-    }
-}
+    return (
+        <>
+            <div className={s.newPost}>
+                <h2>My Post</h2>
+                <PostFormRedux onSubmit={onClickHandler}/>
+            </div>
+            {newPostLists.reverse()}
+        </>
+    )
+})
 
 const maxLength30 = maxLengthCreator(30)
 const PostForm: React.FC<InjectedFormProps<formType>> = ({handleSubmit}) => {
