@@ -13,7 +13,7 @@ export class ProfileStatus extends React.Component<ProfileStatusPropsType, any> 
     }
 
     componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<any>, snapshot?: any) {
-        console.log('rednder')
+        console.log('render')
     }
 
     state = {
