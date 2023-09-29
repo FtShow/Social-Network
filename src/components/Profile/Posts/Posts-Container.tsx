@@ -2,7 +2,7 @@ import React from "react";
 import {Posts} from "./Posts";
 import {connect} from "react-redux";
 import {
-    addPostActionCreator,
+    addPostAC,
     changeNewPostTextActionCreator,
     clearPostActionCreator
 } from "../../../Redux/ProfileReduce";
@@ -16,7 +16,7 @@ let mapStateToProps = (state: any) => {
 
 export const PostsContainer = connect(mapStateToProps,
     {
-        addPostActionCreator,
+        addPostActionCreator: addPostAC,
         clearPostActionCreator,
         changeNewPostTextActionCreator,
     })(Posts)

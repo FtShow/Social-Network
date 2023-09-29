@@ -1,11 +1,11 @@
 
 // Тестирование добавления поста
 import {
-    addPostActionCreator,
+    addPostAC,
     changeNewPostTextActionCreator,
-    clearPostActionCreator, profilePageType,
+    clearPostActionCreator, deletePostAC, profilePageType,
     ProfileReducer, setStatus, setUserProfile, updateStatus
-} from "../ProfileReduce";
+} from "./ProfileReduce";
 
 const initialState: profilePageType = {
     posts: [
@@ -27,7 +27,7 @@ const initialState: profilePageType = {
 
 test('should add a new post', () => {
     const textPost = 'New Post Text';
-    const action = addPostActionCreator(textPost);
+    const action = addPostAC(textPost);
 
     const newState = ProfileReducer(initialState, action);
 
@@ -82,4 +82,13 @@ test('should update status', () => {
     const newState = ProfileReducer(initialState, action);
 
     expect(newState.status).toBe(newStatus);
+});
+//удаление поста
+test('should update status', () => {
+    const id = 2;
+    const action = deletePostAC(id);
+
+    const newState = ProfileReducer(initialState, action);
+
+    expect(newState.posts.length).toBe(initialState.posts.length - 1);
 });

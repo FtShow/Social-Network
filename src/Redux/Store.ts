@@ -1,7 +1,7 @@
 // import {rerenderEntreTree} from "./rerender";
 import {store} from "./Redux-Store";
 import {ChangeEvent} from "react";
-import {addPostActionCreator, changeNewPostTextActionCreator, clearPostActionCreator} from "./ProfileReduce";
+import {addPostAC, changeNewPostTextActionCreator, clearPostActionCreator} from "./ProfileReduce";
 
 
 

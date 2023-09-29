@@ -6,6 +6,7 @@ const CLEAR_POST = "CLEAR_POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS"
 const UPDATE_STATUS = "UPDATE_STATUS"
+const DELETE_POST = "DELETE_POST"
 export type postsItemType = {
     id: number,
     post: string | undefined
@@ -76,12 +77,17 @@ export const ProfileReducer = (state: profilePageType = initialState, action: Pr
                 ...state,
                 status: action.status
             }
-        case UPDATE_STATUS:{
+        case UPDATE_STATUS: {
             return {
                 ...state,
                 status: action.newStatus
             }
         }
+        case DELETE_POST:
+            return {
+                ...state,
+                posts: state.posts.filter(p => p.id !== action.postId)
+            }
 
         default:
             return state;
@@ -89,10 +95,16 @@ export const ProfileReducer = (state: profilePageType = initialState, action: Pr
 };
 
 
-export const addPostActionCreator = (textPost: string) => {
+export const addPostAC = (textPost: string) => {
     return {
         type: ADD_POST,
         textPost
+    } as const
+}
+export const deletePostAC = (postId: number | string) => {
+    return {
+        type: DELETE_POST,
+        postId
     } as const
 }
 export const setStatus = (status: string) => {
@@ -140,12 +152,13 @@ export const updateStatusTC = (newStatus: string) => (dispatch: any) => {
 }
 
 
-type AddPostActionType = ReturnType<typeof addPostActionCreator>;
+type AddPostActionType = ReturnType<typeof addPostAC>;
 type ClearPostActionType = ReturnType<typeof clearPostActionCreator>;
 type ChangeNewPostTextActionType = ReturnType<typeof changeNewPostTextActionCreator>;
 type setUserProfileType = ReturnType<typeof setUserProfile>;
 type setStatusType = ReturnType<typeof setStatus>;
 type updateStatusType = ReturnType<typeof updateStatus>;
+type deletePostType = ReturnType<typeof deletePostAC>;
 
 
 type ProfileActionTypes =
@@ -155,4 +168,5 @@ type ProfileActionTypes =
     | setUserProfileType
     | setStatusType
     | updateStatusType
+    | deletePostType
 
