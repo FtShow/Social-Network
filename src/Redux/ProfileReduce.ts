@@ -1,12 +1,12 @@
 import {ProfileAPI, UserAPI} from "./Api";
 
-const ADD_POST = "ADD_POST";
-const CHANGE_NEW_POST_TEXT = "CHANGE_NEW_POST_TEXT";
-const CLEAR_POST = "CLEAR_POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_STATUS = "SET_STATUS"
-const UPDATE_STATUS = "UPDATE_STATUS"
-const DELETE_POST = "DELETE_POST"
+const ADD_POST = "social-network/profile/ADD_POST";
+const CHANGE_NEW_POST_TEXT = "social-network/profile/CHANGE_NEW_POST_TEXT";
+const CLEAR_POST = "social-network/profile/CLEAR_POST";
+const SET_USER_PROFILE = "social-network/profile/SET_USER_PROFILE";
+const SET_STATUS = "social-network/profile/SET_STATUS"
+const UPDATE_STATUS = "social-network/profile/UPDATE_STATUS"
+const DELETE_POST = "social-network/profile/DELETE_POST"
 export type postsItemType = {
     id: number,
     post: string | undefined
@@ -133,22 +133,23 @@ export const setUserProfile = (profile: any) => {
     } as const
 }
 
-export const getUserProfileTC = (userId: number | string) => (dispatch: any) => {
-    ProfileAPI.getProfile(userId)
-        .then(res => dispatch(setUserProfile(res.data)))
+export const getUserProfileTC = (userId: number | string) => async (dispatch: any) => {
+    const res = await ProfileAPI.getProfile(userId)
+    dispatch(setUserProfile(res.data))
 }
 
-export const setStatusTS = (userId: string | number) => (dispatch: any) => {
-    ProfileAPI.getStatus(userId)
-        .then(res => {
-            console.log(res)
-            dispatch(setStatus(res.data))
-        })
+export const setStatusTS = (userId: string | number) => async (dispatch: any) => {
+    const res = await ProfileAPI.getStatus(userId)
+    dispatch(setStatus(res.data))
+
 }
 
-export const updateStatusTC = (newStatus: string) => (dispatch: any) => {
-    ProfileAPI.updateStatus(newStatus)
-        .then(res => dispatch(updateStatus(newStatus)))
+export const updateStatusTC = (newStatus: string) => async (dispatch: any) => {
+    const res = await ProfileAPI.updateStatus(newStatus)
+    if (res.data.resultCode === 0) {
+        dispatch(updateStatus(newStatus))
+    }
+
 }
 
 

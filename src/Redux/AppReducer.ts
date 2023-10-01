@@ -28,9 +28,8 @@ export const initializedSuccess = () => {
 type combineActionType =
     | ReturnType<typeof initializedSuccess>
 
-export const initializedApp = () => (dispatch: any)=>{
-    Promise.all([dispatch(getAuthUserDataTC())])
-        .then(()=> {
-            dispatch(initializedSuccess())
-        })
+export const initializedApp = () => async (dispatch: any) => {
+    await dispatch(getAuthUserDataTC())
+    dispatch(initializedSuccess())
+
 }
