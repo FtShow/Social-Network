@@ -32,12 +32,11 @@ type LoginFormType = {
     Password: string,
     RememberMe: boolean,
 }
-const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = (props) => {
-    console.log("ERROR")
-    console.log(props.error)
+const LoginForm: React.FC<InjectedFormProps<LoginFormType>> = ({handleSubmit, error}) => {
+
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div className={props.error && ls.globalErrorBlock}>{props.error}
+        <form onSubmit={handleSubmit}>
+            <div className={error && ls.globalErrorBlock}>{error}
             <div><Field placeholder={'Login'} validate={[required]} name={'email'} component={ContainerInput}/></div>
             <div><Field placeholder={'Password'} validate={[required]} name={'password'} type={'password'} component={ContainerInput}/></div>
             <div><Field type="checkbox" name={'RememberMe'} component={'input'}/> Remember me</div>

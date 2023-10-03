@@ -22,7 +22,7 @@ type UsersType = {
 }
 
 export const Users = (props: UsersType) => {
-    props.setFollowingInProgress(true)
+
 
     return (
         <div className={us.usersContainer}>

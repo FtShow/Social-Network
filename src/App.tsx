@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import {NavBar} from "./components/NavBar/NavBar";
-import {BrowserRouter, Route, RouteComponentProps, withRouter} from "react-router-dom";
+import {Route, withRouter} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
@@ -11,11 +11,10 @@ import Login from "./components/Login/Login";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import {connect} from "react-redux";
-import {getAuthUserDataTC} from "./Redux/AuthReducer";
-import {compose} from "redux";
 import {initializedApp} from "./Redux/AppReducer";
 import {RootStateType} from "./Redux/Redux-Store";
 import {Preloader} from "./components/common/Preloader/Preloader";
+
 type MapStateToPropsType = {
     initialize: boolean
 }

@@ -169,33 +169,31 @@ export const setFollowingInProgress = (isFetching: boolean) => {
     } as const
 }
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => (dispatch: any) => {
+export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: any) => {
     dispatch(setIsFetching(true));
-    UserAPI.getUsers(currentPage, pageSize)
-        .then(data => {
-            dispatch(setIsFetching(false))
-            dispatch(setUsers(data.items));
-            dispatch(setTotalUserCount(data.totalCount));
-        });
+    const data = await UserAPI.getUsers(currentPage, pageSize)
+    dispatch(setIsFetching(false))
+    dispatch(setUsers(data.items));
+    dispatch(setTotalUserCount(data.totalCount));
+
 }
-export const followTC = (userId: number) => (dispatch: any) => {
+
+export const followTC = (userId: number) => async (dispatch: any) => {
     dispatch(setFollowingInProgress(true));
-    UserAPI.requestUnFollow(userId)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(unFollow(userId));
-            }
-            dispatch(setFollowingInProgress(false));
-        });
+    const response = await UserAPI.requestUnFollow(userId)
+    if (response.data.resultCode === 0) {
+        dispatch(unFollow(userId));
+    }
+    dispatch(setFollowingInProgress(false));
+
 }
-export const unFollowTC = (userId: number) => (dispatch: any) => {
+export const unFollowTC = (userId: number) => async (dispatch: any) => {
     dispatch(setFollowingInProgress(true));
-    UserAPI.requestFollow(userId)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(follow(userId));
-            }
-            dispatch(setFollowingInProgress(false));
-        });
+    const response = await UserAPI.requestFollow(userId)
+    if (response.data.resultCode === 0) {
+        dispatch(follow(userId));
+    }
+    dispatch(setFollowingInProgress(false));
+
 }
 
